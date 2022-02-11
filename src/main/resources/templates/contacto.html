@@ -1,0 +1,120 @@
+<!doctype html>
+<html class="no-js" lang="zxx"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="/plantilla :: head"></head> 
+
+    <body>
+
+        <div th:replace="/plantilla :: preloader"></div>
+
+        <header th:replace="/plantilla :: header"></header> 
+
+        <main>
+            <!--? Hero Start -->
+            <div class="slider-area2 fondo-contacto">
+                <div class="slider-height2 d-flex align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="hero-cap hero-cap2 pt-20 text-center">
+                                    <h2>CONTACTANOS</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hero End -->
+            <!--?  Contact Area start  -->
+            <section class="contact-section">
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <h2 class="contact-title">Deja tu consulta y en breve responderemos...</h2>
+                        </div>
+                        <div class="col-lg-8 p-5 caja-mensaje">
+                            <form class="form-contact contact_form" action="" method="post" id="contactForm" novalidate="novalidate">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nombre'" placeholder="Nombre">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Asunto'" placeholder="Asunto">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mensaje'" placeholder="Mensaje"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <button type="submit" class="button button-contactForm boxed-btn">Enviar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-3 offset-lg-1">
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-home"></i></span>
+                                <div class="media-body">
+                                    <h3>Las Heras, Mendoza.</h3>
+                                    <p>Miserere 102</p>
+                                </div>
+                            </div>
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                                <div class="media-body">
+                                    <h3>WhatsApp</h3>
+                                    <p>2615123456</p>
+                                </div>
+                            </div>
+                            <div class="media contact-info">
+                                <span class="contact-info__icon"><i class="ti-email"></i></span>
+                                <div class="media-body">
+                                    <h3>fundacioncampolina@gmail.com</h3>
+                                    <p>Escribenos!!!</p>
+                                </div>
+                            </div>
+                            <div class="media contact-info">
+
+                                <div class="media-body">
+                                    <h2>Buscanos en</h2>
+                                </div>
+
+                            </div>
+                            <div class="media contact-info">
+
+                                <a th:href="@{https://www.instagram.com/fundacion.campolina/}"><img src="img/instagram.png" height="75px" width="75px" alt=""></a>&nbsp;&nbsp;
+                                <a th:href="@{https://www.facebook.com/Fundaci%C3%B3n-Campolina-110054267896242/}"><img src="img/facebook.png" height="75px" width="75px" alt=""></a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-none d-sm-block mb-5 mt-5 pb-2">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3351.020516860708!2d-68.81979978525658!3d-32.871176575400916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e08d15b72696f%3A0xd27f22dae51d5c0f!2sMiserere%20102%2C%20Las%20Heras%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1643314093524!5m2!1ses-419!2sar" width="1200" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+
+                </div>
+
+                </div>
+            </section>
+            <!-- Contact Area End -->
+        </main>
+
+        <footer th:replace="/plantilla :: footer"></footer>
+
+        <span th:replace="/plantilla :: js-script"></span>
+
+    </body>
+</html>

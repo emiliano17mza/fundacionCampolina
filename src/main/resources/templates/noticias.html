@@ -1,0 +1,260 @@
+<!doctype html>
+<html class="no-js" lang="zxx"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="/plantilla :: head"></head> 
+
+    <body>
+
+        <div th:replace="/plantilla :: preloader"></div>
+
+        <header th:replace="/plantilla :: header"></header> 
+
+        <main>
+            <!--? Hero Start -->
+            <div class="slider-area2 fondo-noticias">
+                <div class="slider-height2 d-flex align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="hero-cap hero-cap2 pt-20 text-center">
+                                    <h2>Noticias</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hero End -->
+
+            <!--? Formulario para agregar nueva noticia -->
+            <div class="container mt-50">
+
+                <div class="row" th:if="${error} == 'ok'" th:fragment="mensaje-error">
+
+                    <div class ="col-xl-6">
+
+                        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                            <p th:text="${msj_error}"></p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xl-6">
+                        <p>
+                            <a class="btn btn-success btn-lg fs-3" data-bs-toggle="collapse" href="#collapseAgregarNoticia" role="button" aria-expanded="false" aria-controls="collapseAgregarNoticia">
+                                + Agregar nueva noticia
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseAgregarNoticia">
+                            <div class="card card-body">
+                                <form th:action="@{/guardar}" th:object="${noticia}" method="POST"
+                                      enctype="multipart/form-data">  
+                                    <div class="mb-5">
+                                        <label for="titulo" class="form-label">Título</label>
+                                        <input type="text" th:field="*{titulo}" class="form-control fs-3" id="titulo" aria-describedby="titulo" required>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="file" class="form-label">Cargar Imagen</label>
+                                        <input class="form-control fs-3" type="file" id="file" name="file">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="texto" class="form-label">Texto</label>
+                                        <textarea th:field= "*{texto}" class="form-control fs-3" id="texto" rows="10" required></textarea>
+                                    </div>    
+                                    <button type="submit" class="btn btn-success">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--? Blog Area Start-->
+            <section class="blog_area section-padding">           
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mb-5 mb-lg-0">
+                            <div class="blog_left_sidebar">
+
+                                <article class="blog_item" th:each ="noticia : ${noticias}">
+                                    <div class="blog_item_img">
+
+                                        <!--<a th:href="@{/noticia/cargarImagen/__${noticia.id}__}"><button type="button" class="btn btn-warning btn-lg fs-10">+ Cargar imagen</button></a>-->
+
+                                        <div class="row">
+
+                                            <div class="col-xl-6">
+                                                <p>
+                                                    <a class="btn btn-warning fs-3" data-bs-toggle="collapse" href="#collapseBotonCArgar" role="button" aria-expanded="false" aria-controls="collapseBotonCArgar">
+                                                        + Cambiar imagen
+                                                    </a>
+                                                </p>
+                                                <div class="collapse" id="collapseBotonCArgar">
+                                                    <div class="card card-body">
+                                                        
+                                                        <form th:action="@{/cargarImagen}" th:object="${noticia}" method="POST"
+                                                              enctype="multipart/form-data">
+
+                                                            <input type="hidden" name="id" th:value="${noticia.id}">
+
+                                                                    <div class="mb-3">
+                                                                        <input class="form-control fs-3" type="file" id="formFile" name="file">
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <button class="btn btn-success btn-lg fs-15" type="submit"> Cargar imagen </button>
+                                                                    </div> 
+                                                        </form>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <img th:if="${noticia.imagen} != 'null'" class="card-img rounded-0" th:src="@{img/noticias/__${noticia.imagen}__}" 
+                                             width="300" height="400">
+                                        <img th:if="${noticia.imagen} == 'null'" class="card-img rounded-0" th:src="@{img/noticias/fondo-noticia.jpg}" 
+                                             width="300" height="400">      
+                                        <a href="#" class="blog_item_date">
+                                            <h3 th:text="${noticia.fecha.getDate()}"></h3>
+                                            <span th:if="${noticia.fecha.getMonth()} == 0"><p>Ene</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 1"><p>Feb</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 2"><p>Mar</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 3"><p>Abr</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 4"><p>May</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 5"><p>Jun</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 6"><p>Jul</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 7"><p>Ago</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 8"><p>Sep</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 9"><p>Oct</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 10"><p>Nov</p></span>
+                                            <span th:if="${noticia.fecha.getMonth()} == 11"><p>Dic</p></span>
+                                        </a>   
+
+                                    </div>
+
+                                    <div class="blog_details">  
+
+                                        <!--<form th:action="@{/noticiaDetalle}" th:object="${noticia}" method="POST">
+
+                                            <a><button class="boton-enlace" type="submit">
+                                                    <h2 class="blog-head" style="color: #2d2d2d;" th:text="${noticia.titulo}"></h2>
+                                                </button></a>
+                                            <input type="hidden" name="id" th:value="${noticia.id}">
+                                            <p th:text="${noticia.textoCortado}"></p>
+
+                                        </form>-->
+
+                                        <a class="d-inline-block" th:href="@{/noticia/noticiaDetalle/__${noticia.id}__}">
+                                            <h2 class="blog-head" style="color: #2d2d2d;" th:text="${noticia.titulo}"></h2>
+                                        </a>
+                                        <p th:text="${noticia.textoCortado}"></p>
+                                        
+                                    </div>
+                                    
+                                </article>
+
+                                <nav class="blog-pagination justify-content-center d-flex">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a href="#" class="page-link" aria-label="Previous">
+                                                <i class="ti-angle-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="#" class="page-link">1</a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a href="#" class="page-link">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a href="#" class="page-link" aria-label="Next">
+                                                <i class="ti-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="blog_right_sidebar">
+                                <aside class="single_sidebar_widget search_widget">
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder='Search Keyword'
+                                                       onfocus="this.placeholder = ''"
+                                                       onblur="this.placeholder = 'Search Keyword'">
+                                                <div class="input-group-append">
+                                                    <button class="btns" type="button"><i class="ti-search"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                type="submit">Search</button>
+                                    </form>
+                                </aside>
+                                <aside class="single_sidebar_widget post_category_widget">
+                                    <h4 class="widget_title" style="color: #2d2d2d;">Category</h4>
+                                    <ul class="list cat-list">
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Resaurant food</p>
+                                                <p>(37)</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Travel news</p>
+                                                <p>(10)</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Modern technology</p>
+                                                <p>(03)</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Product</p>
+                                                <p>(11)</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Inspiration</p>
+                                                <p>21</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex">
+                                                <p>Health Care (21)</p>
+                                                <p>09</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </aside>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Blog Area End -->
+        </main>
+
+        <footer th:replace="/plantilla :: footer"></footer>
+
+        <span th:replace="/plantilla :: js-script"></span>
+
+    </body>
+</html>
